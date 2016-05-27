@@ -1,0 +1,224 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>sixone</title><meta name="generator" content="MATLAB 7.13"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2012-05-09"><meta name="DC.source" content="sixone.m"><style type="text/css">
+
+body {
+  background-color: white;
+  margin:10px;
+}
+
+h1 {
+  color: #990000; 
+  font-size: x-large;
+}
+
+h2 {
+  color: #990000;
+  font-size: medium;
+}
+
+/* Make the text shrink to fit narrow windows, but not stretch too far in 
+wide windows. */ 
+p,h1,h2,div.content div {
+  max-width: 600px;
+  /* Hack for IE6 */
+  width: auto !important; width: 600px;
+}
+
+pre.codeinput {
+  background: #EEEEEE;
+  padding: 10px;
+}
+@media print {
+  pre.codeinput {word-wrap:break-word; width:100%;}
+} 
+
+span.keyword {color: #0000FF}
+span.comment {color: #228B22}
+span.string {color: #A020F0}
+span.untermstring {color: #B20000}
+span.syscmd {color: #B28C00}
+
+pre.codeoutput {
+  color: #666666;
+  padding: 10px;
+}
+
+pre.error {
+  color: red;
+}
+
+p.footer {
+  text-align: right;
+  font-size: xx-small;
+  font-weight: lighter;
+  font-style: italic;
+  color: gray;
+}
+
+  </style></head><body><div class="content"><pre class="codeinput"><span class="comment">%Antonios Mourdoukoutas</span>
+disp(<span class="string">'Part A'</span>)
+f=@(x)x.^7 -3*x.^5 + 5*x.^4 +3;
+syms <span class="string">x</span>;
+dy=diff(f(x),3);
+dy=@(x)subs(dy);
+x=1:5;
+dy(x)
+</pre><pre class="codeoutput">Part A
+
+ans =
+
+         150        2880       15750       51360      127350
+
+</pre><pre class="codeinput">disp(<span class="string">'Part B'</span>)
+syms <span class="string">x</span>
+f=@(x)exp (x*sin(x)) + 2*log(x.^2+1);
+dy=diff(f(x),2);
+dy=@(x)subs(dy);
+x=-pi:pi/4:pi
+dy(x)
+</pre><pre class="codeoutput">Part B
+
+x =
+
+  Columns 1 through 7
+
+   -3.1416   -2.3562   -1.5708   -0.7854         0    0.7854    1.5708
+
+  Columns 8 through 9
+
+    2.3562    3.1416
+
+
+ans =
+
+  Columns 1 through 7
+
+    7.5693  -11.8571   -3.2340    4.8602    6.0000    4.8602   -3.2340
+
+  Columns 8 through 9
+
+  -11.8571    7.5693
+
+</pre><pre class="codeinput">disp(<span class="string">'Part C'</span>)
+syms <span class="string">x</span>;
+syms <span class="string">y</span>;
+f=@(x,y)(x.^2+y.^2)/(x+y).^2;
+zx= diff(f(x,y),x);
+zxy=diff(zx,y);
+fxy=@(x,y)subs(zxy);
+X=[1, 2, 3, 4, 5]
+Y=[1, 2, 3, 4, 5]
+fxy(X,Y)
+</pre><pre class="codeoutput">Part C
+
+X =
+
+     1     2     3     4     5
+
+
+Y =
+
+     1     2     3     4     5
+
+
+ans =
+
+   -0.2500   -0.0625   -0.0278   -0.0156   -0.0100
+
+</pre><pre class="codeinput">disp(<span class="string">'Part D'</span>)
+syms <span class="string">x</span>;
+syms <span class="string">y</span>;
+syms <span class="string">z</span>;
+g=@(x,y,z)x.^3*y.^2*z+sqrt(x.^2+y.^2+z.^2);
+vx=diff(g(x,y,z),x);
+vxy=diff(vx,y);
+vxyz=diff(vxy,z);
+gxyz=@(x,y,z)subs(vxyz);
+X=[1, 1, -1, -1, -1, -1, 1, 1]
+Y=[1, 1, 1, 1, -1, -1, -1, -1]
+Z=[-1, 1, -1, 1, -1, 1, -1, 1]
+gxyz(X,Y,Z)
+</pre><pre class="codeoutput">Part D
+
+X =
+
+     1     1    -1    -1    -1    -1     1     1
+
+
+Y =
+
+     1     1     1     1    -1    -1    -1    -1
+
+
+Z =
+
+    -1     1    -1     1    -1     1    -1     1
+
+
+ans =
+
+  Columns 1 through 7
+
+    5.8075    6.1925    6.1925    5.8075   -6.1925   -5.8075   -5.8075
+
+  Column 8
+
+   -6.1925
+
+</pre><p class="footer"><br>
+      Published with MATLAB&reg; 7.13<br></p></div><!--
+##### SOURCE BEGIN #####
+%Antonios Mourdoukoutas
+disp('Part A')
+f=@(x)x.^7 -3*x.^5 + 5*x.^4 +3;
+syms x;
+dy=diff(f(x),3);
+dy=@(x)subs(dy);
+x=1:5;
+dy(x)
+
+%%
+disp('Part B')
+syms x
+f=@(x)exp (x*sin(x)) + 2*log(x.^2+1);
+dy=diff(f(x),2);
+dy=@(x)subs(dy);
+x=-pi:pi/4:pi
+dy(x)
+%%
+disp('Part C')
+syms x;
+syms y;
+f=@(x,y)(x.^2+y.^2)/(x+y).^2;
+zx= diff(f(x,y),x);
+zxy=diff(zx,y);
+fxy=@(x,y)subs(zxy);
+X=[1, 2, 3, 4, 5]
+Y=[1, 2, 3, 4, 5]
+fxy(X,Y)
+%%
+disp('Part D')
+syms x;
+syms y;
+syms z;
+g=@(x,y,z)x.^3*y.^2*z+sqrt(x.^2+y.^2+z.^2);
+vx=diff(g(x,y,z),x);
+vxy=diff(vx,y);
+vxyz=diff(vxy,z);
+gxyz=@(x,y,z)subs(vxyz);
+X=[1, 1, -1, -1, -1, -1, 1, 1]
+Y=[1, 1, 1, 1, -1, -1, -1, -1]
+Z=[-1, 1, -1, 1, -1, 1, -1, 1]
+gxyz(X,Y,Z)
+
+
+
+##### SOURCE END #####
+--></body></html>
